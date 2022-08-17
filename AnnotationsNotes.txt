@@ -1,0 +1,142 @@
+Annotatins can be categorized as follows
+1. Marker Annotation ->  @Override
+2. Single Valued Annotation -> @SuppressWarning("unchecked")
+3.Muivalued Annotation -> @WebServlet(name="CBITMCA",urlPattern={"/mca","/MCADept")}
+
+
+                                                                                  Annotations
+
+
+                       Standard Annotations				Cutomized Annotations
+
+
+General Purpose Annotaions               Meta Annotations
+  1. @Override			1.@Documented
+  2. @SuppressWarnings		2.@Target  ->ElementType.TYPE,FILED,METHOD                                                                                              &CONSTRUCTOR
+  3.@Depricated			3.@Inherited
+  4. @FunctionalInterface		4.@Retention  ->RentionPolicy.SOURCE, CLASS, 				RUNTIME	
+1,2,3 are in --upto Java 7
+4-> added in Java 8 
+
+@Override:
+
+class SuperClass{
+    public void getDetails(){
+       System.out.println("Super class Disp Method");
+   }
+  }
+class SubClass extends SuperClass{
+  @Override //try to remove this and compile once and observe   
+  public void getdetails(){    //speeling mistaken it should be getDetails()
+       System.out.println("Super class Disp Method");
+   }
+  }
+ public class AtOverride{
+	public static void main(String[] args) 
+	{
+		SuperClass sp=new SubClass();
+		sp.getDetails();		
+	}
+}
+
+2. @SuppressWarnings
+@SuppressWarnings is to suppress or ignore warnings coming from the compiler, i.e., the compiler will ignore warnings if any for that piece of code.
+
+
+import java.util.*;
+
+class Addition {
+
+	
+	public static int sum(int n1, int n2)
+	{
+			return n1 + n2;
+	}
+
+	public static int sum(int... nums)
+	{
+		int sum = 0;
+		for (int i : nums) {
+			sum += i;
+		}
+
+		return sum;
+	}
+}
+
+public class AtSupressWarning {
+
+	
+	//@SuppressWarnings("unchecked")
+    public static void main(String[] args)
+	{
+		Addition add = new Addition();
+     	//@SuppressWarnings("deprecation")
+		int sum = Addition.sum(10, 20);
+		System.out.println("Sum of 10 and 20 : " + sum);
+		
+		int sum2 = Addition.sum(10, 20,30);
+		System.out.println("Sum of 10,20 and 30 : " + sum2);
+		
+		@SuppressWarnings("rawtypes")
+		List list = new ArrayList();	
+		list.add(12);
+		list.add(120);
+		System.out.println("List items : " + list);
+	}
+}
+
+
+3. @Deprecated
+The @Deprecated annotation tells the compiler that a method, class, or field is deprecated and that it should generate a warning if someone tries to use it. That’s what a deprecated class or method is. It’s no longer relevant. 
+class MyDepricate
+{
+	@Deprecated //comment it and try
+	public void display(){
+		System.out.println("The  display method");
+	}
+	public void newDisp(){
+		System.out.println("The new disp method");
+	}
+}
+public class AtDeprecated 
+{
+	public static void main(String[] args) 
+	{
+		MyDepricate m=new MyDepricate();
+		m.display();
+		m.newDisp();
+		
+	}
+}
+
+
+4. @FunctionalInterface 
+
+
+@FunctionalInterface
+interface MyInterface
+{
+	void showCase();
+	//void disp(); //if you dont comment it, it gives error as FunctionalInterface can not have two abstract methods
+}
+
+class FunctionalInterfaceImpl 
+{
+	void showCase(){
+		System.out.println("ShowCase Implented");
+	}
+	void disp(){
+			System.out.println("Disp Implented");
+	}
+	public static void main(String[] args) 
+	{
+		FunctionalInterfaceImpl m=new FunctionalInterfaceImpl();
+		m.showCase();
+		m.disp();
+	}
+}
+
+
+
+
